@@ -1,7 +1,7 @@
 # configured aws provider with proper credentials
 provider "aws" {
   region  = "us-east-1"
-  profile = "yusuf"
+  profile = "meslek2002"
 }
 
 
@@ -125,7 +125,7 @@ resource "aws_instance" "ec2_instance" {
   instance_type          = "t2.medium"
   subnet_id              = aws_default_subnet.default_az1.id
   vpc_security_group_ids = [aws_security_group.ec2_security_group6.id]
-  key_name               = "devopskeypair"
+  key_name               = "demolampkp"
   count                  = 3
 
   tags = {
@@ -135,7 +135,7 @@ resource "aws_instance" "ec2_instance" {
   connection {
     type        = "ssh"
     user        = "ec2-user"
-    private_key = file("~/Downloads/devopskeypair.pem")
+    private_key = file("~/Downloads/demolampkp.pem")
     host = self.public_ip
 
 
