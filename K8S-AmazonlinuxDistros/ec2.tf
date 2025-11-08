@@ -103,8 +103,8 @@ resource "aws_security_group" "ec2_security_group6" {
 }
 
 
-# use data source to get a registered amazon linux 2 ami
-data "aws_ami" "amazon_linux_2" {
+# use data source to get a registered amazon linux 2023 ami
+data "aws_ami" "amazon_linux_2023" {
   most_recent = true
   owners      = ["amazon"]
 
@@ -121,7 +121,7 @@ data "aws_ami" "amazon_linux_2" {
 
 # launch the ec2 instance
 resource "aws_instance" "ec2_instance" {
-  ami                    = data.aws_ami.amazon_linux_2.id
+  ami                    = data.aws_ami.amazon_linux_2023.id
   instance_type          = "t2.medium"
   subnet_id              = aws_default_subnet.default_az1.id
   vpc_security_group_ids = [aws_security_group.ec2_security_group6.id]
@@ -157,4 +157,5 @@ resource "aws_instance" "ec2_instance" {
 # print the url of the container
 output "container_url" {
  value = ["${aws_instance.ec2_instance.*.public_ip}"]
+
 }
